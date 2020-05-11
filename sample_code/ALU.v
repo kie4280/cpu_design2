@@ -23,7 +23,7 @@ wire             zero_o;
 assign zero = &~result_o;
 
 //constants
-localparam [4-1:0] AND=0, OR=1, NAND=2, NOR=3, ADDU=4, SUBU=5, SLT=6, EQUAL=7, 
+localparam [4-1:0] AND=0, OR=1, NAND=2, NOR=3, ADDU=4, SUBU=5, SLT=6, EQUAL=7;
 
 case(ctrl_i) 
     AND: begin

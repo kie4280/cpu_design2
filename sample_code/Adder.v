@@ -14,4 +14,6 @@ output [32-1:0]	 sum_o;
 //Internal Signals
 wire   [32-1:0]	 sum_o;
 
+assign sum_o = src1_i + src2_i;
+
 endmodule

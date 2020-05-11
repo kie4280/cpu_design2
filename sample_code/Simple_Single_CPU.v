@@ -9,11 +9,14 @@ module Simple_Single_CPU(
 input clk_i;
 input rst_i;
 
+wire [32-1:0] instruction;
+wire [32-1:0] ProgramCounter;
+
 ProgramCounter PC(
     .clk_i(clk_i),
-    .rst_i (),
+    .rst_i (rst_i),
     .pc_in_i(),
-    .pc_out_o()
+    .pc_out_o(ProgramCounter)
     );
 
 Adder Adder1(
@@ -24,7 +27,7 @@ Adder Adder1(
 
 Instr_Memory IM(
     .pc_addr_i(),
-    .instr_o()
+    .instr_o(instruction)
     );
 
 MUX_2to1 #(.size(5)) Mux_Write_Reg(
