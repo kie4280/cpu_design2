@@ -11,6 +11,7 @@ input rst_i;
 
 wire [32-1:0] instruction;
 wire [32-1:0] ProgramCounter;
+wire [5-1:0] reg_write_addr;
 
 ProgramCounter PC(
     .clk_i(clk_i),
@@ -26,13 +27,13 @@ Adder Adder1(
     );
 
 Instr_Memory IM(
-    .pc_addr_i(),
+    .pc_addr_i(ProgramCounter),
     .instr_o(instruction)
     );
 
 MUX_2to1 #(.size(5)) Mux_Write_Reg(
-    .data0_i(),
-    .data1_i(),
+    .data0_i(instruction[20:16]),
+    .data1_i(instruction[15:11]),
     .select_i(),
     .data_o()
     );

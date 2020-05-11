@@ -21,15 +21,19 @@ output reg        Branch_o;
 
 //begin logic
 
-if(instr_op_i==5'b00000) begin
+always@(*) begin
+
+    if(instr_op_i==5'b00000) begin
     RegDst_o = 1;
      
 
-end else begin
-    RegDst_o = 0;
+    end else begin
+        RegDst_o = 0;
 
 
-
+    end
 end
+
+
 
 endmodule

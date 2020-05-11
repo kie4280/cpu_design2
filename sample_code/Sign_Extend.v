@@ -13,12 +13,16 @@ output  [32-1:0] data_o;
 
 //Internal Signals
 reg     [32-1:0] data_o;
-if (sign==1) begin
-    data_o={{data_i[15],16},data_i};
-end else begin
-    data_o={{0,16},data_i};
+
+always@(*) begin
+//Sign extended
+    if (sign==1) begin
+        data_o={{16{data_i[15]}},data_i};
+    end else begin
+        data_o={{16{1'b0}}, data_i};
+    end
+
 end
 
-//Sign extended
 
 endmodule

@@ -17,11 +17,17 @@ output  [size-1:0] data_o;
 
 //Internal Signals
 reg     [size-1:0] data_o;
-if (select_i==1) begin
-    data_o=data1_i;    
+
+//begin logic
+always@(*) begin
+    if (select_i==1) begin
+        data_o=data1_i;    
+    end
+    else begin
+        data_o=data0_i;
+    end
+
 end
-else begin
-    data_o=data0_i;
-end
+
 
 endmodule

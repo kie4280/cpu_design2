@@ -20,12 +20,13 @@ output           zero_o;
 reg    [32-1:0]  result_o;
 wire             zero_o;
 
-assign zero = &~result_o;
+assign zero_o = &(~result_o);
 
 //constants
 localparam [4-1:0] AND=0, OR=1, NAND=2, NOR=3, ADDU=4, SUBU=5, SLT=6, EQUAL=7;
 
-case(ctrl_i) 
+always@(*) begin
+    case(ctrl_i) 
     AND: begin
         result_o = src1_i & src2_i;
     end
@@ -46,5 +47,9 @@ case(ctrl_i)
     end
 
 endcase
+
+
+end
+
 
 endmodule
