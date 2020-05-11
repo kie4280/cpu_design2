@@ -10,7 +10,7 @@ input clk_i;
 input rst_i;
 
 ProgramCounter PC(
-    .clk_i(),
+    .clk_i(clk_i),
     .rst_i (),
     .pc_in_i(),
     .pc_out_o()
@@ -35,8 +35,8 @@ MUX_2to1 #(.size(5)) Mux_Write_Reg(
     );
 
 Reg_File RF(
-    .clk_i(),
-    .rst_i() ,
+    .clk_i(clk_i),
+    .rst_i(rst_i) ,
     .RSaddr_i() ,
     .RTaddr_i() ,
     .RDaddr_i() ,
