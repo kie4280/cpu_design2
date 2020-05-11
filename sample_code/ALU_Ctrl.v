@@ -57,7 +57,7 @@ always@(*) begin
     else if(ALUOp_i == ADDI) begin
 
     end
-    else if(ALUOp_i == ALTIU) begin
+    else if(ALUOp_i == SLTIU) begin
 
 
     end
