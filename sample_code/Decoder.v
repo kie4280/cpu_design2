@@ -18,6 +18,9 @@ output reg        ALUSrc_o;
 output reg        RegDst_o;
 output reg        Branch_o;
 
+//ALUOP from decoder
+localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
+
 
 //begin logic
 
