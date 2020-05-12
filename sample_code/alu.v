@@ -6,7 +6,7 @@ module alu(
         src1,          // 32 bits source 1          (input)
         src2,          // 32 bits source 2          (input)
         ALU_control,   // 4 bits ALU control input  (input)
-		bonus_control, // 3 bits bonus control input(input) 
+		comp, // 3 bits bonus control input(input) 
         result,        // 32 bits result            (output)
         zero,          // 1 bit when the output is 0, zero must be set (output)
         cout,          // 1 bit carry out           (output)
@@ -18,7 +18,7 @@ input           rst_n;
 input  [32-1:0] src1;
 input  [32-1:0] src2;
 input   [4-1:0] ALU_control;
-input   [3-1:0] bonus_control; 
+input   [3-1:0] comp; 
 output [32-1:0] result;
 output reg      zero;
 output reg      cout;
@@ -30,7 +30,7 @@ wire[33-1:0] carry;
 reg A_invert;
 reg B_invert;
 reg[2-1:0] operation;
-reg[3-1:0] comp;
+
 wire set;
 reg[32-1:0] result_reg;
 wire[32-1:0] result_wire;
@@ -62,7 +62,7 @@ assign result_wire = result_reg;
 
 always @(*) begin
 
-    comp = bonus_control;
+    
 
     if(rst_n) begin        
 
@@ -148,22 +148,22 @@ always @(*) begin
                         (src1[31] == 1 && src2[31] == 0)};
                     end
                     3'b001: begin // SGT
-                        result_reg = {31'b0, 0};
+                        result_reg = {31'b0, 1'b0};
                     end
                     3'b010: begin // SLE
-                        result_reg = {31'b0, 0};
+                        result_reg = {31'b0, 1'b0};
                     end
                     3'b011: begin // SGE
-                        result_reg = {31'b0, 0};
+                        result_reg = {31'b0, 1'b0};
                     end
                     3'b110: begin // SEQ
-                        result_reg = {31'b0, 0};
+                        result_reg = {31'b0, 1'b0};
                     end
                     3'b100: begin // SNE
-                        result_reg = {31'b0, 0};
+                        result_reg = {31'b0, 1'b0};
                     end
                     3'b101: begin //SLTU
-                        result_reg = {31'b0, result_wire[31]}
+                        result_reg = {31'b0, result_wire[31]};
                     end
                 endcase
 

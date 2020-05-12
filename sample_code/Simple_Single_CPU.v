@@ -10,11 +10,12 @@ input clk_i;
 input rst_i;
 
 wire [32-1:0] instruction;
-wire [32-1:0] ProgramCounter_i, ProgramCounter_o, ProgramCounter_4
+wire [32-1:0] ProgramCounter_i, ProgramCounter_o, ProgramCounter_4,
               ProgramCounter_b, ProgramCounter_w, ProgramCounter_4w;
 wire [32-1:0] RSdata, RTdata, RDdata, Mux_ALU;
 wire [5-1:0] reg_write_addr, RD_addr;
-wire reg_write, reg_dst, alu_src, branch, alu_op;
+wire reg_write, reg_dst, alu_src, branch;
+wire[3-1:0] alu_op;
 wire sign, zero;
 wire [4-1:0] alu_ctrl;
 

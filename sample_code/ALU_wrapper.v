@@ -19,52 +19,78 @@ output [32-1:0]	 result_o;
 output           zero_o;
 
 //Internal signals
-reg    [32-1:0]  result_o;
-wire             zero_o;
+
+wire          zero_o;
+
+reg [32-1:0]  result_o;
+wire          cout_out;
+wire          overflow_out;
+reg [3-1:0]   comp;
+reg [4-1:0]   ALU_Ctrl;
+wire [32-1:0] result_out;
 
 alu alu(
 	.rst_n(rst_n),
-	.src1(src1_in),
-	.src2(src2_in),
-	.ALU_control(operation_in),
-	.bonus_control(bonus_in),
+	.src1(src1_i),
+	.src2(src2_i),
+	.ALU_control(ALU_Ctrl),
+	.comp(comp),
 	.result(result_out),
-	.zero(zero_out),
+	.zero(zero_o),
 	.cout(cout_out),
 	.overflow(overflow_out)
 );
 
 
-assign zero_o = &(~result_o);
 
 //actual ALU control code
 localparam [4-1:0] AND=0, OR=1, NAND=2, NOR=3, ADDU=4, SUBU=5, SLT=6, EQUAL=7,
-                   SRA=8, SRAV=9, LUI=10, SLTU;
+                   SRA=8, SRAV=9, LUI=10, SLTU=11;
 
 always@(*) begin
+
+    if(ctrl_i == SLT) comp = 3'b000;
+    else comp = 3'b101; 
+
     case(ctrl_i) 
         AND: begin
-            result_o = src1_i & src2_i;
+            ALU_Ctrl = 4'b0000;
+            result_o = result_out;
         end
         OR: begin
-            result_o = src1_i | src2_i;
-
+            ALU_Ctrl = 4'b0001;
+            result_o = result_out;
         end
         ADDU: begin
-            result_o = src1_i + src2_i;
-            
+            ALU_Ctrl = 4'b0010;
+            result_o = result_out;
         end
         SUBU: begin
-            result_o = src1_i - src2_i;
-
+            ALU_Ctrl = 4'b0110;
+            result_o = result_out;
         end
         SLT: begin
-            result_o = {31'b0, src1_i < src2_i}; 
+            ALU_Ctrl = 4'b0111; 
+            result_o = result_out;
         end
         LUI: begin
             result_o = {src2_i[15:0], 16'b0};
         end
         SLTU: begin
+            ALU_Ctrl = 4'b0111;
+            result_o = result_out;
+        end
+        SRA: begin
+            result_o = src1_i >>> src2_i;
+
+        end
+        SRAV: begin
+            result_o = src1_i >>> src2_i;
+
+        end
+
+        default: begin
+
 
         end
 
