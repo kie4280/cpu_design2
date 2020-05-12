@@ -14,7 +14,7 @@ wire [32-1:0] ProgramCounter_i, ProgramCounter_o, ProgramCounter_4,
               ProgramCounter_b, ProgramCounter_w, ProgramCounter_4w;
 wire [32-1:0] RSdata, RTdata, RDdata, Mux_ALU;
 wire [5-1:0] reg_write_addr, RD_addr;
-wire reg_write, reg_dst, alu_src, branch;
+wire reg_write, reg_dst, alu_src, branch, branch_eq;
 wire[3-1:0] alu_op;
 wire sign, zero;
 wire [4-1:0] alu_ctrl;
@@ -63,7 +63,8 @@ Decoder Decoder(
     .ALU_op_o(alu_op),
     .ALUSrc_o(alu_src),
     .RegDst_o(reg_dst),
-    .Branch_o(branch)
+    .Branch_o(branch),
+    .Branch_eq(branch_eq)
     );
 
 ALU_Ctrl AC(
@@ -107,7 +108,7 @@ Shift_Left_Two_32 Shifter(
 MUX_2to1 #(.size(32)) Mux_PC_Source(
     .data0_i(ProgramCounter_4),//
     .data1_i(ProgramCounter_4w),//
-    .select_i(zero&branch),//
+    .select_i((branch_eq?zero:~zero)&branch),//
     .data_o(ProgramCounter_i)//
     );
 

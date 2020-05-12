@@ -6,7 +6,8 @@ module Decoder(
     ALU_op_o,
     ALUSrc_o,
     RegDst_o,
-    Branch_o
+    Branch_o,
+    Branch_eq
     );
 
 //I/O ports
@@ -17,6 +18,7 @@ output reg[3-1:0] ALU_op_o;
 output reg        ALUSrc_o;
 output reg        RegDst_o;
 output reg        Branch_o;
+output reg        Branch_eq;
 
 
 //ALUOP from decoder
@@ -30,7 +32,7 @@ always@(*) begin
     
     RegDst_o = (instr_op_i == 6'b000000);
     Branch_o = (instr_op_i == 6'b000100 || instr_op_i == 6'b000101);
-    
+    Branch_eq = (instr_op_i == 6'b000100);
 
     case (instr_op_i)
         6'b000000: begin

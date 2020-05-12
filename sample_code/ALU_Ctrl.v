@@ -21,15 +21,13 @@ output reg Sign_extend_o;
 
 //actual ALU control code
 localparam [4-1:0] A_AND=0, A_OR=1, A_NAND=2, A_NOR=3, A_ADDU=4, A_SUBU=5, A_SLT=6, A_EQUAL=7,
-                   A_SRA=8, A_SRAV=9, A_LUI=10;
+                   A_SRA=8, A_SRAV=9, A_LUI=10, A_SLTU=11;
 
 //ALUOP from decoder
 localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 
 //begin logic
-always@(*) begin
-
-    
+always@(*) begin    
 
 
     if(ALUOp_i == R_TYPE) begin
@@ -63,23 +61,29 @@ always@(*) begin
 
     else if(ALUOp_i == ADDI) begin
         Sign_extend_o = 1;
+        ALUCtrl_o = A_ADDU;
 
     end
     else if(ALUOp_i == SLTIU) begin
         Sign_extend_o = 1;
+        ALUCtrl_o = A_SLTU;
 
     end
     else if(ALUOp_i == BEQ)begin
         Sign_extend_o = 1;
+        ALUCtrl_o = A_SUBU;
     end
     else if (ALUOp_i == LUI) begin
         Sign_extend_o = 0;
+        ALUCtrl_o = A_LUI;
     end
     else if (ALUOp_i == ORI) begin
         Sign_extend_o = 0;
+        ALUCtrl_o = A_OR;
     end 
     else if(ALUOp_i == BNE)begin
         Sign_extend_o = 1;
+        ALUCtrl_o = A_SUBU;
     end
 
     else begin
