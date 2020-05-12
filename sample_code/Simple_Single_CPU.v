@@ -87,6 +87,7 @@ MUX_2to1 #(.size(32)) Mux_ALUSrc(
     );
 
 ALU ALU(
+    .rst_n(rst_i),
     .src1_i(RSdata),//
     .src2_i(Mux_ALU),//
     .ctrl_i(alu_ctrl),//
