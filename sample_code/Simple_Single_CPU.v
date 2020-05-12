@@ -51,7 +51,7 @@ Reg_File RF(
     .RSaddr_i(instruction[25:21]) ,
     .RTaddr_i(instruction[20:16]) ,
     .RDaddr_i(RD_addr) ,
-    .RDdata_i(0) ,//
+    .RDdata_i(RDdata) ,//
     .RegWrite_i (reg_write),//
     .RSdata_o(RSdata) ,//
     .RTdata_o(RTdata)//
@@ -69,7 +69,7 @@ Decoder Decoder(
 
 ALU_Ctrl AC(
     .funct_i(instruction[5:0]),//
-    .ALUOp_i(),//
+    .ALUOp_i(alu_op),//
     .ALUCtrl_o(alu_ctrl)//
     );
 
