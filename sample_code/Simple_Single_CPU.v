@@ -12,6 +12,8 @@ input rst_i;
 wire [32-1:0] instruction;
 wire [32-1:0] ProgramCounter;
 wire [5-1:0] reg_write_addr;
+wire reg_write, reg_dst, alu_src, branch;
+wire [3-1:0] alu_ctrl;
 
 ProgramCounter PC(
     .clk_i(clk_i),
@@ -41,9 +43,9 @@ MUX_2to1 #(.size(5)) Mux_Write_Reg(
 Reg_File RF(
     .clk_i(clk_i),
     .rst_i(rst_i) ,
-    .RSaddr_i() ,
-    .RTaddr_i() ,
-    .RDaddr_i() ,
+    .RSaddr_i(instruction[25:21]) ,
+    .RTaddr_i(instruction[20:16]) ,
+    .RDaddr_i(instruction[15:11]) ,
     .RDdata_i()  ,
     .RegWrite_i (),
     .RSdata_o() ,
@@ -51,12 +53,12 @@ Reg_File RF(
     );
 
 Decoder Decoder(
-    .instr_op_i(),
-    .RegWrite_o(),
-    .ALU_op_o(),
-    .ALUSrc_o(),
-    .RegDst_o(),
-    .Branch_o()
+    .instr_op_i(instruction[31:26]),
+    .RegWrite_o(reg_write),
+    .ALU_op_o(alu_ctrl),
+    .ALUSrc_o(alu_src),
+    .RegDst_o(reg_dst),
+    .Branch_o(branch)
     );
 
 ALU_Ctrl AC(
@@ -67,7 +69,8 @@ ALU_Ctrl AC(
 
 Sign_Extend SE(
     .data_i(),
-    .data_o()
+    .data_o(),
+    .sign_i()
     );
 
 MUX_2to1 #(.size(32)) Mux_ALUSrc(

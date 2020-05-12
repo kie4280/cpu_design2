@@ -18,6 +18,7 @@ output reg        ALUSrc_o;
 output reg        RegDst_o;
 output reg        Branch_o;
 
+
 //ALUOP from decoder
 localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 
@@ -26,46 +27,48 @@ localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 
 always@(*) begin
 
-    if(instr_op_i==6'b000000) begin
-        RegDst_o = 1;
+    
+    RegDst_o = (instr_op_i == 6'b000000);
+    Branch_o = (instr_op_i == 6'b000100 || instr_op_i == 6'b000101);
+    
 
-    end else begin
-        RegDst_o = 0;
-
-    end
-
-
-    case (intr_op_i)
-        6'b000000: 
-            ALU_op_o = 0;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-        6'b001000:
-            ALU_op_o = 1;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-        6'b001011:
-            ALU_op_o = 2;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-        6'b000100:
-            ALU_op_o = 3;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-        6'b001111:
-            ALU_op_o = 4;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-        6'b001101:
-            ALU_op_o = 5;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-        6'b000101):
-            ALU_op_o = 6;
-            ALUSrc_o = ;
-            RegWrite_o = ;
-
-        default: 
+    case (instr_op_i)
+        6'b000000: begin
+            ALU_op_o = R_TYPE;
+            ALUSrc_o = 0;
+            RegWrite_o = 1;
+        end
+        6'b001000: begin
+            ALU_op_o = ADDI;
+            ALUSrc_o = 1;
+            RegWrite_o = 1;
+        end
+        6'b001011: begin
+            ALU_op_o = SLTIU;
+            ALUSrc_o = 1;
+            RegWrite_o = 1;
+        end
+        6'b000100: begin
+            ALU_op_o = BEQ;
+            ALUSrc_o = 0;
+            RegWrite_o = 0;
+        end
+        6'b001111: begin
+            ALU_op_o = LUI;
+            ALUSrc_o = 1;
+            RegWrite_o = 1;
+        end
+        6'b001101: begin
+            ALU_op_o = ORI;
+            ALUSrc_o = 1;
+            RegWrite_o = 1;
+        end
+        6'b000101: begin
+            ALU_op_o = BNE;
+            ALUSrc_o = 0;
+            RegWrite_o = 0;
+        end
+        default: ;
     endcase
     
 end
