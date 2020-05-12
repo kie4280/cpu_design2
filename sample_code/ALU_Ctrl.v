@@ -21,7 +21,7 @@ output reg Sign_extend_o;
 
 //actual ALU control code
 localparam [4-1:0] A_AND=0, A_OR=1, A_NAND=2, A_NOR=3, A_ADDU=4, A_SUBU=5, A_SLT=6, A_EQUAL=7,
-                   A_SFT=8, A_SFTV=9, A_LUI=10;
+                   A_SRA=8, A_SRAV=9, A_LUI=10;
 
 //ALUOP from decoder
 localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
@@ -50,10 +50,10 @@ always@(*) begin
                 ALUCtrl_o = A_SLT;
             end
             6'b000011: begin // shift right constant
-                ALUCtrl_o = A_SFT;
+                ALUCtrl_o = A_SRA;
             end
             6'b000111: begin //shift right variable
-                ALUCtrl_o = A_SFTV;
+                ALUCtrl_o = A_SRAV;
             end
 
 

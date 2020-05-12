@@ -1,6 +1,6 @@
 // Author: 0710018 張宸愷
 
-module ALU(
+module ALU_old(
     src1_i,
     src2_i,
     ctrl_i,
