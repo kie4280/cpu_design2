@@ -26,15 +26,48 @@ localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 
 always@(*) begin
 
-    if(instr_op_i==5'b00000) begin
-    RegDst_o = 1;
-     
+    if(instr_op_i==6'b000000) begin
+        RegDst_o = 1;
 
     end else begin
         RegDst_o = 0;
 
-
     end
+
+
+    case (intr_op_i)
+        6'b000000: 
+            ALU_op_o = 0;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+        6'b001000:
+            ALU_op_o = 1;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+        6'b001011:
+            ALU_op_o = 2;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+        6'b000100:
+            ALU_op_o = 3;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+        6'b001111:
+            ALU_op_o = 4;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+        6'b001101:
+            ALU_op_o = 5;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+        6'b000101):
+            ALU_op_o = 6;
+            ALUSrc_o = ;
+            RegWrite_o = ;
+
+        default: 
+    endcase
+    
 end
 
 

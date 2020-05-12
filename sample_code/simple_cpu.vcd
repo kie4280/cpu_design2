@@ -1,0 +1,188 @@
+$date
+	Tue May 12 00:10:57 2020
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module TestBench $end
+$scope module cpu $end
+$var wire 1 ! clk_i $end
+$var wire 1 " rst_i $end
+$var wire 32 # instruction [31:0] $end
+$var wire 32 $ ProgramCounter [31:0] $end
+$scope module AC $end
+$var wire 3 % ALUOp_i [2:0] $end
+$var wire 6 & funct_i [5:0] $end
+$var reg 4 ' ALUCtrl_o [3:0] $end
+$upscope $end
+$scope module ALU $end
+$var wire 4 ( ctrl_i [3:0] $end
+$var wire 32 ) src1_i [31:0] $end
+$var wire 32 * src2_i [31:0] $end
+$var wire 1 + zero_o $end
+$var reg 32 , result_o [31:0] $end
+$upscope $end
+$scope module Adder1 $end
+$var wire 32 - src1_i [31:0] $end
+$var wire 32 . src2_i [31:0] $end
+$var wire 32 / sum_o [31:0] $end
+$upscope $end
+$scope module Adder2 $end
+$var wire 32 0 src1_i [31:0] $end
+$var wire 32 1 src2_i [31:0] $end
+$var wire 32 2 sum_o [31:0] $end
+$upscope $end
+$scope module Decoder $end
+$var wire 6 3 instr_op_i [5:0] $end
+$var reg 1 4 ALUSrc_o $end
+$var reg 3 5 ALU_op_o [2:0] $end
+$var reg 1 6 Branch_o $end
+$var reg 1 7 RegDst_o $end
+$var reg 1 8 RegWrite_o $end
+$upscope $end
+$scope module IM $end
+$var wire 32 9 pc_addr_i [31:0] $end
+$var reg 32 : instr_o [31:0] $end
+$var integer 32 ; i [31:0] $end
+$upscope $end
+$scope module Mux_ALUSrc $end
+$var wire 32 < data0_i [31:0] $end
+$var wire 32 = data1_i [31:0] $end
+$var wire 1 > select_i $end
+$var reg 32 ? data_o [31:0] $end
+$upscope $end
+$scope module Mux_PC_Source $end
+$var wire 32 @ data0_i [31:0] $end
+$var wire 32 A data1_i [31:0] $end
+$var wire 1 B select_i $end
+$var reg 32 C data_o [31:0] $end
+$upscope $end
+$scope module Mux_Write_Reg $end
+$var wire 5 D data0_i [4:0] $end
+$var wire 5 E data1_i [4:0] $end
+$var wire 1 F select_i $end
+$var reg 5 G data_o [4:0] $end
+$upscope $end
+$scope module PC $end
+$var wire 1 ! clk_i $end
+$var wire 32 H pc_in_i [31:0] $end
+$var wire 1 " rst_i $end
+$var reg 32 I pc_out_o [31:0] $end
+$upscope $end
+$scope module RF $end
+$var wire 5 J RDaddr_i [4:0] $end
+$var wire 32 K RDdata_i [31:0] $end
+$var wire 5 L RSaddr_i [4:0] $end
+$var wire 32 M RSdata_o [31:0] $end
+$var wire 5 N RTaddr_i [4:0] $end
+$var wire 32 O RTdata_o [31:0] $end
+$var wire 1 P RegWrite_i $end
+$var wire 1 ! clk_i $end
+$var wire 1 " rst_i $end
+$upscope $end
+$scope module SE $end
+$var wire 16 Q data_i [15:0] $end
+$var wire 1 R sign $end
+$var reg 32 S data_o [31:0] $end
+$upscope $end
+$scope module Shifter $end
+$var wire 32 T data_i [31:0] $end
+$var wire 32 U data_o [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bz00 U
+bz T
+b0zzzzzzzzzzzzzzzz S
+zR
+bz Q
+zP
+bx O
+bz N
+bx M
+bz L
+bz K
+bz J
+bx I
+bz H
+bx G
+zF
+bx E
+bx D
+bz C
+zB
+bz A
+bz @
+bz ?
+z>
+bz =
+bz <
+b100000 ;
+bx :
+bx 9
+x8
+07
+x6
+bx 5
+x4
+bz 3
+bx 2
+bz 1
+bz 0
+bx /
+bz .
+bz -
+bx ,
+x+
+bz *
+bz )
+bz (
+bx '
+bz &
+bz %
+bx $
+bx #
+0"
+0!
+$end
+#5
+b11 G
+b0 E
+b11 D
+b10000110000000000100001 #
+b10000110000000000100001 :
+b0 $
+b0 9
+b0 I
+1!
+#10
+0!
+1"
+#15
+bx G
+bx E
+bx D
+bx #
+bx :
+bz $
+bz 9
+bz I
+1!
+#20
+0!
+#25
+1!
+#30
+0!
+#35
+1!
+#40
+0!
+#45
+1!

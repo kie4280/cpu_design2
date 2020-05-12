@@ -18,7 +18,8 @@ reg        [4-1:0] ALUCtrl_o;
 //Select exact operation
 
 //actual ALU control code
-localparam [4-1:0] AND=0, OR=1, NAND=2, NOR=3, ADDU=4, SUBU=5, SLT=6, EQUAL=7;
+localparam [4-1:0] AND=0, OR=1, NAND=2, NOR=3, ADDU=4, SUBU=5, SLT=6, EQUAL=7
+                   SFT=8, SFTV=9;
 
 //ALUOP from decoder
 localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
@@ -43,10 +44,10 @@ always@(*) begin
                 ALUCtrl_o = SLT;
             end
             6'b000011: begin // shift right constant
-
+                ALU_Ctrl = SFT;
             end
             6'b000111: begin //shift right variable
-
+                ALU_Ctrl = SFTV;
             end
 
 
@@ -60,6 +61,18 @@ always@(*) begin
     else if(ALUOp_i == SLTIU) begin
 
 
+    end
+    else if(ALUOp_i == BEQ)begin
+
+    end
+    else if (ALUOp_i == LUI) begin
+        
+    end
+    else if (ALUOp_i == ORI) begin
+        
+    end 
+    else if(ALUOp_i == BNE)begin
+        
     end
 
 end
