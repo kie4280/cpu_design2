@@ -96,15 +96,11 @@ MUX_2to1 #(.size(32)) Mux_ALUSrc2(
     .data_o(Mux_Alu_src2)
     );
 
-Sign_Extend2 SE2(
-    .data_i(Mux_Alu_src2),
-    .data_o(src64)
-);
 
 ALU ALU(
     .rst_n(rst_i),
     .src1_i(Mux_Alu_src1),//
-    .src2_i(src64),//
+    .src2_i(Mux_Alu_src2),//
     .ctrl_i(alu_ctrl),//
     .result_o(RDdata),//
     .zero_o(zero)//

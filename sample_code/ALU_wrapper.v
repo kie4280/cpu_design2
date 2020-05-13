@@ -11,7 +11,7 @@ module ALU(
 
 //I/O ports
 input  [32-1:0]  src1_i;
-input  [64-1:0]	 src2_i;
+input  [32-1:0]	 src2_i;
 input  [4-1:0]   ctrl_i;
 input rst_n;
 
@@ -28,13 +28,18 @@ wire          overflow_out;
 reg [3-1:0]   comp;
 reg [4-1:0]   ALU_Ctrl;
 wire [32-1:0] result_out;
-wire [32-1:0] src2;
-assign src2=src2_i[32-1:0];
+wire [64-1:0] shift_src;
+
+
+Sign_Extend2 e2(
+    .data_i(src2_i),
+    .data_o(shift_src)
+);
 
 alu alu(
 	.rst_n(rst_n),
 	.src1(src1_i),
-	.src2(src2),
+	.src2(src2_i),
 	.ALU_control(ALU_Ctrl),
 	.comp(comp),
 	.result(result_out),
@@ -83,11 +88,11 @@ always@(*) begin
             result_o = result_out;
         end
         SRA: begin
-            result_o = src2_i >> src1_i[10:6];
+            result_o = shift_src >> src1_i[10:6];
 
         end
         SRAV: begin
-            result_o = src2_i >> src1_i;
+            result_o = shift_src >> src1_i;
 
         end
 
