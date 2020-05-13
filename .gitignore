@@ -1,3 +1,3 @@
-testbench.v
-simple_cpu.vvp
-simple_cpu.vcd
+/sample_code/Test_Bench.v
+/sample_code/simple_cpu.vvp
+/sample_code/simple_cpu.vcd

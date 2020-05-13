@@ -1,4 +1,4 @@
-// Author:
+// Author: 0710018 張宸愷
 
 module Decoder(
     rst_n,

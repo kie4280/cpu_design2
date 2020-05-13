@@ -1,4 +1,4 @@
-// Author:
+// Author: 0710018 張宸愷
 
 module ALU_Ctrl(
         funct_i,
@@ -67,7 +67,7 @@ always@(*) begin
 
     end
     else if(ALUOp_i == SLTIU) begin
-        Sign_extend_o = 1;
+        Sign_extend_o = 0;
         ALUCtrl_o = A_SLTU;
 
     end
