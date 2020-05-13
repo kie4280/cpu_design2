@@ -58,6 +58,7 @@ Reg_File RF(
     );
 
 Decoder Decoder(
+    .rst_n(rst_i),
     .instr_op_i(instruction[31:26]),
     .RegWrite_o(reg_write),
     .ALU_op_o(alu_op),
