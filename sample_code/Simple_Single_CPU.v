@@ -12,10 +12,10 @@ input rst_i;
 wire [32-1:0] instruction;
 wire [32-1:0] ProgramCounter_i, ProgramCounter_o, ProgramCounter_4,
               ProgramCounter_b, ProgramCounter_w, ProgramCounter_4w;
-wire [32-1:0] RSdata, RTdata, RDdata, Mux_ALU;
+wire [32-1:0] RSdata, RTdata, RDdata, Mux_Alu_src2, Mux_Alu_src1;
 wire [5-1:0]  RD_addr;
-wire reg_write, reg_dst, alu_src, branch, branch_eq;
-wire[3-1:0] alu_op;
+wire reg_write, reg_dst, alu_src1, alu_src2, branch, branch_eq;
+wire[4-1:0] alu_op;
 wire sign, zero;
 wire [4-1:0] alu_ctrl;
 
@@ -62,7 +62,7 @@ Decoder Decoder(
     .instr_op_i(instruction[31:26]),
     .RegWrite_o(reg_write),
     .ALU_op_o(alu_op),
-    .ALUSrc_o(alu_src),
+    .ALUSrc_o(alu_src2),
     .RegDst_o(reg_dst),
     .Branch_o(branch),
     .Branch_eq(branch_eq)
@@ -72,7 +72,8 @@ ALU_Ctrl AC(
     .funct_i(instruction[5:0]),//
     .ALUOp_i(alu_op),//
     .ALUCtrl_o(alu_ctrl),//
-    .Sign_extend_o(sign)
+    .Sign_extend_o(sign),
+    .Mux_ALU_src1(alu_src1)
     );
 
 Sign_Extend SE(
@@ -81,17 +82,23 @@ Sign_Extend SE(
     .data_o(ProgramCounter_b)//
     );
 
-MUX_2to1 #(.size(32)) Mux_ALUSrc(
+MUX_2to1 #(.size(32)) Mux_ALUSrc1(
+    .data0_i(RSdata),//
+    .data1_i(ProgramCounter_b),//
+    .select_i(alu_src1),//
+    .data_o(Mux_Alu_src1)
+    );
+MUX_2to1 #(.size(32)) Mux_ALUSrc2(
     .data0_i(RTdata),//
     .data1_i(ProgramCounter_b),//
-    .select_i(alu_src),//
-    .data_o(Mux_ALU)
+    .select_i(alu_src2),//
+    .data_o(Mux_Alu_src2)
     );
 
 ALU ALU(
     .rst_n(rst_i),
-    .src1_i(RSdata),//
-    .src2_i(Mux_ALU),//
+    .src1_i(Mux_Alu_src1),//
+    .src2_i(Mux_Alu_src2),//
     .ctrl_i(alu_ctrl),//
     .result_o(RDdata),//
     .zero_o(zero)//

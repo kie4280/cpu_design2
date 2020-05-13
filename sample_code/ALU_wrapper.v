@@ -81,11 +81,11 @@ always@(*) begin
             result_o = result_out;
         end
         SRA: begin
-            result_o = src1_i >>> src2_i;
+            result_o = src2_i >> src1_i[10:6];
 
         end
         SRAV: begin
-            result_o = src1_i >>> src2_i;
+            result_o = src2_i >> src1_i;
 
         end
 

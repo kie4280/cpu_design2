@@ -16,15 +16,15 @@ input  [6-1:0] instr_op_i;
 input rst_n;
 
 output reg        RegWrite_o = 0;
-output reg[3-1:0] ALU_op_o = 0;
+output reg[4-1:0] ALU_op_o = 0;
 output reg        ALUSrc_o = 0;
 output reg        RegDst_o = 0;
 output reg        Branch_o = 0;
 output reg        Branch_eq = 0;
 
 
-//ALUOP from decoder
-localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
+//ALUOP for decoder
+localparam[4-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 
 
 //begin logic

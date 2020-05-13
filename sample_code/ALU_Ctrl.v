@@ -4,18 +4,20 @@ module ALU_Ctrl(
         funct_i,
         ALUOp_i,
         ALUCtrl_o,
-        Sign_extend_o
+        Sign_extend_o,
+        Mux_ALU_src1
         );
 
 //I/O ports
 input      [6-1:0] funct_i;
-input      [3-1:0] ALUOp_i;
+input      [4-1:0] ALUOp_i;
 
 output     [4-1:0] ALUCtrl_o;
 
 //Internal Signals
 reg        [4-1:0] ALUCtrl_o;
 output reg Sign_extend_o;
+output reg  Mux_ALU_src1;
 
 //Select exact operation
 
@@ -24,12 +26,12 @@ localparam [4-1:0] A_AND=0, A_OR=1, A_NAND=2, A_NOR=3, A_ADDU=4, A_SUBU=5, A_SLT
                    A_SRA=8, A_SRAV=9, A_LUI=10, A_SLTU=11;
 
 //ALUOP from decoder
-localparam[3-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
+localparam[4-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 
 //begin logic
 always@(*) begin    
 
-
+    Mux_ALU_src1 = (funct_i == 6'b000011);
     if(ALUOp_i == R_TYPE) begin
         case(funct_i) 
             6'b100001: begin //add unsigned
