@@ -58,7 +58,7 @@ generate
 endgenerate
 
 assign carry[0] = (ALU_control == 4'b0110 || ALU_control == 4'b0111);
-assign result_wire = result_reg;
+assign result = result_reg;
 
 always @(*) begin
 
