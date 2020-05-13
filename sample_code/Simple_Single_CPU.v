@@ -70,7 +70,8 @@ Decoder Decoder(
 ALU_Ctrl AC(
     .funct_i(instruction[5:0]),//
     .ALUOp_i(alu_op),//
-    .ALUCtrl_o(alu_ctrl)//
+    .ALUCtrl_o(alu_ctrl),//
+    .Sign_extend_o(sign)
     );
 
 Sign_Extend SE(
