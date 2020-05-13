@@ -11,7 +11,7 @@ module ALU(
 
 //I/O ports
 input  [32-1:0]  src1_i;
-input  [32-1:0]	 src2_i;
+input  [64-1:0]	 src2_i;
 input  [4-1:0]   ctrl_i;
 input rst_n;
 
@@ -28,11 +28,13 @@ wire          overflow_out;
 reg [3-1:0]   comp;
 reg [4-1:0]   ALU_Ctrl;
 wire [32-1:0] result_out;
+wire [32-1:0] src2;
+assign src2=src2_i[32-1:0];
 
 alu alu(
 	.rst_n(rst_n),
 	.src1(src1_i),
-	.src2(src2_i),
+	.src2(src2),
 	.ALU_control(ALU_Ctrl),
 	.comp(comp),
 	.result(result_out),

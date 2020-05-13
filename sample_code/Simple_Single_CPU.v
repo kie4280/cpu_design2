@@ -18,6 +18,7 @@ wire reg_write, reg_dst, alu_src1, alu_src2, branch, branch_eq;
 wire[4-1:0] alu_op;
 wire sign, zero;
 wire [4-1:0] alu_ctrl;
+wire [64-1:0] src64;
 
 
 ProgramCounter PC(
@@ -95,10 +96,15 @@ MUX_2to1 #(.size(32)) Mux_ALUSrc2(
     .data_o(Mux_Alu_src2)
     );
 
+Sign_Extend2 SE2(
+    .data_i(Mux_Alu_src2),
+    .data_o(src64)
+);
+
 ALU ALU(
     .rst_n(rst_i),
     .src1_i(Mux_Alu_src1),//
-    .src2_i(Mux_Alu_src2),//
+    .src2_i(src64),//
     .ctrl_i(alu_ctrl),//
     .result_o(RDdata),//
     .zero_o(zero)//
