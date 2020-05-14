@@ -1,4 +1,4 @@
-// Author:
+//Author:張宸愷 0710018 何權祐 0710012
 
 module Sign_Extend(
     data_i,

@@ -1,5 +1,5 @@
 `timescale 1ns/1ps
-//張宸愷 0710018
+//Author:張宸愷 0710018 何權祐 0710012
 
 module alu_top(
     src1,       //1 bit source 1 (input)

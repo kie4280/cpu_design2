@@ -1,4 +1,4 @@
-// Author:
+//Author:張宸愷 0710018 何權祐 0710012
 
 module Simple_Single_CPU(
     clk_i,
