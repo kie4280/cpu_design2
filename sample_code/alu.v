@@ -136,7 +136,7 @@ always @(*) begin
                 
                 A_invert = 0;
                 B_invert = 1;
-                operation = 2'b10;
+                operation = 2'b11;
                 
                 overflow = 0;
                 cout = 0;              
