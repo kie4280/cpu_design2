@@ -31,7 +31,8 @@ localparam[4-1:0] R_TYPE=0, ADDI=1, SLTIU=2, BEQ=3, LUI=4, ORI=5, BNE=6;
 //begin logic
 always@(*) begin    
 
-    Mux_ALU_src1 = (funct_i == 6'b000011);
+    Mux_ALU_src1 = (funct_i == 6'b000011 && ALUOp_i == R_TYPE);
+
     if(ALUOp_i == R_TYPE) begin
         case(funct_i) 
             6'b100001: begin //add unsigned

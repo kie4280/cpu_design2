@@ -136,7 +136,7 @@ always @(*) begin
                 
                 A_invert = 0;
                 B_invert = 1;
-                operation = 2'b11;
+                operation = 2'b10;
                 
                 overflow = 0;
                 cout = 0;              
@@ -163,7 +163,7 @@ always @(*) begin
                         result_reg = {31'b0, 1'b0};
                     end
                     3'b101: begin //SLTU
-                        result_reg = {31'b0, result_wire[31]};
+                        result_reg = {31'b0, result_wire[31] & (~carry[32])};
                     end
                 endcase
 
